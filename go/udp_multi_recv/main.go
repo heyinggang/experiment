@@ -44,42 +44,37 @@ func recvUDPMsg(conn *net.UDPConn, port int) {
 func main() {
     runtime.GOMAXPROCS(10)
 
-    {
     udp_addr, err := net.ResolveUDPAddr("udp", ":7012")
     if err != nil {
         log.Printf("err:%+v\n", err)
         return
     }
 
-    conn, err := net.ListenUDP("udp", udp_addr)
-    if err != nil {
-        log.Printf("err:%+v\n", err)
-        return
-    }
-    defer conn.Close()
+    {
+        conn, err := net.ListenUDP("udp", udp_addr)
+        if err != nil {
+            log.Printf("err:%+v\n", err)
+            return
+        }
+        defer conn.Close()
 
-    for i := 0; i < 10; i++ {
         go recvUDPMsg(conn, 701201)
     }
-    }
 
     {
-    udp_addr, err := net.ResolveUDPAddr("udp", ":7012")
-    if err != nil {
-        log.Printf("err:%+v\n", err)
-        return
-    }
+        udp_addr, err := net.ResolveUDPAddr("udp", ":7012")
+        if err != nil {
+            log.Printf("err:%+v\n", err)
+            return
+        }
 
-    conn, err := net.ListenUDP("udp", udp_addr)
-    if err != nil {
-        log.Printf("err:%+v\n", err)
-        return
-    }
-    defer conn.Close()
-
-    for i := 0; i < 10; i++ {
+        conn, err := net.ListenUDP("udp", udp_addr)
+        if err != nil {
+            log.Printf("err:%+v\n", err)
+            return
+        }
+        defer conn.Close()
         go recvUDPMsg(conn, 701202)
-    }
     }
 
     time.Sleep(10000000 * time.Second);
