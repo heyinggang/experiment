@@ -56,20 +56,15 @@ func main() {
         log.Printf("err:%+v\n", err)
         return
     }
-    conn, err = net.ListenUDP("udp", udp_addr)
-    if err != nil {
-        log.Printf("err:%+v\n", err)
-        return
-    }
     defer conn.Close()
 
     for i := 0; i < 10; i++ {
-        go recvUDPMsg(conn, 7012)
+        go recvUDPMsg(conn, 701201)
     }
     }
 
     {
-    udp_addr, err := net.ResolveUDPAddr("udp", ":7013")
+    udp_addr, err := net.ResolveUDPAddr("udp", ":7012")
     if err != nil {
         log.Printf("err:%+v\n", err)
         return
@@ -83,7 +78,7 @@ func main() {
     defer conn.Close()
 
     for i := 0; i < 10; i++ {
-        go recvUDPMsg(conn, 7013)
+        go recvUDPMsg(conn, 701202)
     }
     }
 
