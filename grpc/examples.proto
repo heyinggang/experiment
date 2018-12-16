@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+
+message AddTaskReq
+{
+    uint64 tid = 1;
+    uint32 idx = 2;
+}
+
+message AddTaskRsp
+{
+    string ret_msg = 1;
+}
+
+service TaskService {
+    rpc AddTask(AddTaskReq) returns (AddTaskRsp);
+}
+
